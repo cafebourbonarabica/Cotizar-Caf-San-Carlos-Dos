@@ -158,23 +158,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 350px; /* Le damos una altura fija y perfecta para el cuadro anterior */
+    height: 280px; /* Reducimos la altura del contenedor para que sea discreto */
     margin-bottom: 25px;
-    background: white;
+    background: #ffffff; /* Fondo blanco limpio para que los lados se unan de forma invisible */
     padding: 10px;
     border-radius: 12px;
     border: 1px solid #e1dcd1;
     box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-    overflow: hidden; /* Corta cualquier exceso para que no se desborde */
 }
 
 .imagen-unica {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Llena el cuadro eliminando los espacios blancos de los lados */
-    object-position: center 25%; /* Centra el diseño para que el logo del saco se vea perfecto */
-    border-radius: 6px;
-    transition: transform 0.3s ease;
+    object-fit: contain; /* Obliga a la imagen a encajar completa sin hacer zoom ni cortarse */
 }
         .imagen-saco:hover {
             transform: scale(1.02);
