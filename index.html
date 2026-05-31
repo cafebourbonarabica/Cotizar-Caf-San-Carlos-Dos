@@ -309,7 +309,7 @@
             margin-top: 40px;
         }
 
-        /* REGLAS RESPONSIVE: Evita el desorden en celulares */
+        /* REGLAS RESPONSIVE PERFECCIONADAS */
         @media (max-width: 900px) {
             nav {
                 padding: 15px 20px;
@@ -323,28 +323,29 @@
                 margin: 20px auto;
             }
 
-            .form-section {
-                padding: 20px;
-                order: 1; /* El formulario va primero arriba */
-            }
-
+            /* CAMBIO CLAVE AQUÍ: La ficha técnica sube al puesto 1 y la cotización baja al puesto 2 */
             .spec-panel {
                 padding: 20px;
-                order: 2; /* La ficha técnica se acomoda abajo limpiamente */
+                order: 1; 
+            }
+
+            .form-section {
+                padding: 20px;
+                order: 2; 
             }
 
             .grid-2 {
-                grid-template-columns: 1fr; /* Los campos se apilan de forma ordenada */
+                grid-template-columns: 1fr;
                 gap: 0;
             }
 
             .saco-container {
-                min-height: 280px; /* Altura controlada para pantallas pequeñas */
+                min-height: 280px;
                 margin-bottom: 15px;
             }
 
             .imagen-saco {
-                max-width: 220px; /* Saco más compacto en móvil para evitar scroll innecesario */
+                max-width: 220px;
             }
 
             .hero h1 {
@@ -403,10 +404,10 @@
             <div class="grid-2">
                 <div class="form-group">
                     <label>Continente</label>
-                    <select id="continente" onchange="actualizarPaises()">
+                    <select id="continente" onchange="actualizarFormulario()">
                         <option value="america">América</option>
                         <option value="europa">Europa</option>
-                        <option value="africa">África</option>
+                        <option value="africa" selected>África</option>
                         <option value="asia">Asia</option>
                         <option value="oceania">Oceanía</option>
                     </select>
@@ -420,15 +421,13 @@
 
             <div class="grid-2">
                 <div class="form-group">
-                    <label>Cantidad (Mínimo 100 Qq)</label>
-                    <input type="number" id="cantidad" value="100" min="100" oninput="calcularTotal()">
+                    <label>Cantidad (Mínimo 150 Qq)</label>
+                    <input type="number" id="cantidad" value="150" min="150" oninput="calcularTotal()">
                 </div>
                 <div class="form-group">
                     <label>Término Incoterm (Precio/Qq)</label>
                     <select id="incoterm" onchange="calcularTotal()">
-                        <option value="540.20">EXW - $540.20 USD</option>
-                        <option value="563.28" selected>FOB - $563.28 USD</option>
-                        <option value="629.75">CIF - $629.75 USD</option>
+                        <!-- Se llena dinámicamente según el continente -->
                     </select>
                 </div>
             </div>
@@ -505,31 +504,59 @@
             oceania: ["Australia", "Nueva Zelanda", "Fiyi", "Papúa Nueva Guinea"]
         };
 
-        function actualizarPaises() {
-            const continenteSel = document.getElementById("continente").value;
-            const paisSelect = document.getElementById("pais");
-            
-            paisSelect.innerHTML = "";
+        const preciosPorContinente = {
+            america: { exw: "540.20", fob: "563.28", cif: "595.50" },
+            europa:  { exw: "540.20", fob: "563.28", cif: "625.00" },
+            africa:  { exw: "540.20", fob: "563.28", cif: "629.75" },
+            asia:    { exw: "540.20", fob: "563.28", cif: "648.20" },
+            oceania: { exw: "540.20", fob: "563.28", cif: "655.00" }
+        };
 
+        function actualizarFormulario() {
+            const continenteSel = document.getElementById("continente").value;
+            
+            const paisSelect = document.getElementById("pais");
+            paisSelect.innerHTML = "";
             paisesPorContinente[continenteSel].forEach(pais => {
                 let opt = document.createElement("option");
                 opt.value = pais;
                 opt.innerText = pais;
-                
-                if(pais === "El Salvador") opt.selected = true;
-                
+                if(continenteSel === "africa" && pais === "Marruecos") opt.selected = true;
+                if(continenteSel === "america" && pais === "Estados Unidos") opt.selected = true;
                 paisSelect.appendChild(opt);
             });
+
+            const incotermSelect = document.getElementById("incoterm");
+            const tarifas = preciosPorContinente[continenteSel];
+            
+            const anteriorSeleccionado = incotermSelect.value ? incotermSelect.options[incotermSelect.selectedIndex].text.split(" ")[0] : "FOB";
+
+            incotermSelect.innerHTML = `
+                <option value="${tarifas.exw}">EXW - $${tarifas.exw} USD</option>
+                <option value="${tarifas.fob}">FOB - $${tarifas.fob} USD</option>
+                <option value="${tarifas.cif}">CIF - $${tarifas.cif} USD</option>
+            `;
+
+            for (let i = 0; i < incotermSelect.options.length; i++) {
+                if (incotermSelect.options[i].text.startsWith(anteriorSeleccionado)) {
+                    incotermSelect.options[i].selected = true;
+                    break;
+                }
+            }
+
+            calcularTotal();
         }
 
         function calcularTotal() {
             let cantidad = parseInt(document.getElementById("cantidad").value);
             
-            if (isNaN(cantidad) || cantidad < 100) {
-                cantidad = 100;
+            if (isNaN(cantidad) || cantidad < 150) {
+                cantidad = 150;
             }
 
             const selectIncoterm = document.getElementById("incoterm");
+            if(!selectIncoterm.value) return;
+
             const precioUnitario = parseFloat(selectIncoterm.value);
             const textoIncoterm = selectIncoterm.options[selectIncoterm.selectedIndex].text.split(" ")[0];
             
@@ -541,8 +568,7 @@
         }
 
         window.onload = function() {
-            actualizarPaises();
-            calcularTotal();
+            actualizarFormulario();
         };
     </script>
 </body>
