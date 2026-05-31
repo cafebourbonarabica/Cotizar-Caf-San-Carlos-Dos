@@ -155,27 +155,26 @@
 
         /* Contenedor del Saco Expandido */
         .saco-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-grow: 1;
-            min-height: 420px;
-            margin-bottom: 25px;
-            background: linear-gradient(135deg, #ffffff 0%, #f5f1e9 100%);
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #e1dcd1;
-            box-shadow: inset 0 0 30px rgba(0,0,0,0.03), 0 4px 12px rgba(0,0,0,0.04);
-        }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Quitamos el flex-grow y el min-height que forzaban la forma vertical */
+    margin-bottom: 25px;
+    background: white;
+    padding: 5px; /* Reducimos el margen interno para ganar espacio */
+    border-radius: 12px;
+    border: 1px solid #e1dcd1;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
 
-        .imagen-saco {
-            width: 100%;
-            max-width: 320px;
-            height: auto;
-            object-fit: contain;
-            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.18));
-            transition: transform 0.3s ease;
-        }
+       .imagen-unica {
+    width: 100%;
+    height: auto;
+    max-height: none; /* Quitamos el límite de 400px para que no se encoja */
+    object-fit: cover; /* Hace que la imagen se expanda y cubra todo el recuadro eliminando los lados blancos */
+    border-radius: 6px;
+    transition: transform 0.3s ease;
+}
 
         .imagen-saco:hover {
             transform: scale(1.02);
