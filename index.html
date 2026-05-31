@@ -82,10 +82,6 @@
             padding: 0 20px;
         }
 
-        @media (max-width: 900px) {
-            .main-wrapper { grid-template-columns: 1fr; }
-        }
-
         /* Formulario (Izquierda) */
         .form-section {
             background: white;
@@ -157,13 +153,13 @@
             flex-direction: column;
         }
 
-        /* Contenedor del Saco Expandido para eliminar el espacio en blanco */
+        /* Contenedor del Saco Expandido */
         .saco-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-grow: 1; /* Permite que crezca y llene el espacio vertical */
-            min-height: 420px; /* Asegura un área visualmente imponente */
+            flex-grow: 1;
+            min-height: 420px;
             margin-bottom: 25px;
             background: linear-gradient(135deg, #ffffff 0%, #f5f1e9 100%);
             padding: 20px;
@@ -174,7 +170,7 @@
 
         .imagen-saco {
             width: 100%;
-            max-width: 320px; /* Tamaño ampliado para mayor presencia */
+            max-width: 320px;
             height: auto;
             object-fit: contain;
             filter: drop-shadow(0 15px 25px rgba(0,0,0,0.18));
@@ -312,6 +308,53 @@
             font-size: 0.85rem;
             margin-top: 40px;
         }
+
+        /* REGLAS RESPONSIVE: Evita el desorden en celulares */
+        @media (max-width: 900px) {
+            nav {
+                padding: 15px 20px;
+                justify-content: center;
+            }
+
+            .main-wrapper {
+                grid-template-columns: 1fr; /* Una sola columna vertical */
+                gap: 25px;
+                padding: 0 15px;
+                margin: 20px auto;
+            }
+
+            .form-section {
+                padding: 20px;
+                order: 1; /* El formulario va primero arriba */
+            }
+
+            .spec-panel {
+                padding: 20px;
+                order: 2; /* La ficha técnica se acomoda abajo limpiamente */
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr; /* Los campos se apilan de forma ordenada */
+                gap: 0;
+            }
+
+            .saco-container {
+                min-height: 280px; /* Altura controlada para pantallas pequeñas */
+                margin-bottom: 15px;
+            }
+
+            .imagen-saco {
+                max-width: 220px; /* Saco más compacto en móvil para evitar scroll innecesario */
+            }
+
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -330,6 +373,7 @@
 
     <div class="main-wrapper">
         
+        <!-- Formulario (Sección Cotización) -->
         <div class="form-section">
             <h2>Solicita tu Cotización de Quintales</h2>
             
@@ -370,7 +414,7 @@
                 <div class="form-group">
                     <label>País Destino</label>
                     <select id="pais">
-                        </select>
+                    </select>
                 </div>
             </div>
 
@@ -404,6 +448,7 @@
             <button class="btn-submit">Enviar Solicitud de Cotización</button>
         </div>
 
+        <!-- Panel Exclusivo para la Ficha Técnica (Sección Producto) -->
         <div class="spec-panel" id="ficha-tecnica">
             
             <div class="saco-container">
