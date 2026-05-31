@@ -154,27 +154,26 @@
         }
 
         /* Contenedor del Saco Expandido */
-      .saco-container {
+    .saco-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-grow: 1;
-    min-height: 380px;
-    margin-bottom: 25px;
+    width: 100%;
+    max-width: 420px; /* Evita que el contenedor blanco se estire horizontalmente */
+    height: 320px; /* Altura fija para que mantenga el tamaño de cuadro original */
+    margin: 0 auto 25px auto; /* Lo centra perfectamente en su columna */
     background: white;
     padding: 10px;
     border-radius: 12px;
     border: 1px solid #e1dcd1;
     box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    overflow: hidden; /* Oculta cualquier desborde rebelde */
 }
 
 .imagen-unica {
     width: 100%;
-    height: auto;
-    max-height: 400px;
-    object-fit: contain;
-    border-radius: 6px;
-    transition: transform 0.3s ease;
+    height: 100%;
+    object-fit: contain; /* Encoge tu imagen de 1200x900 para que quepa enterita dentro del cuadro */
 }
        179     .imagen-unica:hover {
 180         transform: scale(1.02);
