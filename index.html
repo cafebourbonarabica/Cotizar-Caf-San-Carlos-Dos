@@ -154,28 +154,28 @@
         }
 
         /* Contenedor del Saco Expandido */
-        .saco-container {
+       .saco-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Quitamos el flex-grow y el min-height que forzaban la forma vertical */
+    height: 350px; /* Le damos una altura fija y perfecta para el cuadro anterior */
     margin-bottom: 25px;
     background: white;
-    padding: 5px; /* Reducimos el margen interno para ganar espacio */
+    padding: 10px;
     border-radius: 12px;
     border: 1px solid #e1dcd1;
     box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    overflow: hidden; /* Corta cualquier exceso para que no se desborde */
 }
 
-       .imagen-unica {
+.imagen-unica {
     width: 100%;
-    height: auto;
-    max-height: none; /* Quitamos el límite de 400px para que no se encoja */
-    object-fit: cover; /* Hace que la imagen se expanda y cubra todo el recuadro eliminando los lados blancos */
+    height: 100%;
+    object-fit: cover; /* Llena el cuadro eliminando los espacios blancos de los lados */
+    object-position: center 25%; /* Centra el diseño para que el logo del saco se vea perfecto */
     border-radius: 6px;
     transition: transform 0.3s ease;
 }
-
         .imagen-saco:hover {
             transform: scale(1.02);
         }
