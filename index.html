@@ -21,7 +21,7 @@
             padding: 0;
         }
 
-        /* Navbar limpio sin los enlaces de producto/cotización */
+        /* Navbar limpio */
         nav {
             background-color: var(--primary-green);
             padding: 15px 50px;
@@ -52,7 +52,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* Banner Principal estilo ChatGPT Image */
+        /* Banner Principal */
         .hero {
             background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://scontent.fsal13-1.fna.fbcdn.net/v/t39.30808-6/474374908_581513441466380_6248425060797915884_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=833d8c&_nc_ohc=XM8QUpDpCFAQ7kNvwFJ8iZM&_nc_oc=AdpOjmY-14pQTyPgjsYpyO-0caPMYaPw_9bZ-fiQZnFzkdvxHyw8YmMd5ziC_ZbhNzU&_nc_zt=23&_nc_ht=scontent.fsal13-1.fna&_nc_gid=QCVt39_WXdaAh40f1qnqug&_nc_ss=7b289&oh=00_Af_TvNq9KkdpoPrJdt7ireg63ZuSFCBviMt5ZOjpYgl8nA&oe=6A2256A2') center/cover;
             color: white;
@@ -92,6 +92,8 @@
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
         }
 
         .form-section h2 {
@@ -151,32 +153,36 @@
             border-radius: 8px;
             padding: 25px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            align-self: start;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Contenedor REDISEÑADO para que la imagen luzca espaciosa y pulcra */
+        /* Contenedor del Saco Expandido para eliminar el espacio en blanco */
         .saco-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin: 10px 0 30px 0;
-            background: linear-gradient(135deg, #ffffff 0%, #f7f5f0 100%);
-            padding: 35px 20px;
+            flex-grow: 1; /* Permite que crezca y llene el espacio vertical */
+            min-height: 420px; /* Asegura un área visualmente imponente */
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #ffffff 0%, #f5f1e9 100%);
+            padding: 20px;
             border-radius: 12px;
             border: 1px solid #e1dcd1;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.02), 0 4px 10px rgba(0,0,0,0.03);
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.03), 0 4px 12px rgba(0,0,0,0.04);
         }
 
         .imagen-saco {
-            max-width: 220px;
+            width: 100%;
+            max-width: 320px; /* Tamaño ampliado para mayor presencia */
             height: auto;
             object-fit: contain;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.12));
+            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.18));
             transition: transform 0.3s ease;
         }
 
         .imagen-saco:hover {
-            transform: scale(1.03);
+            transform: scale(1.02);
         }
 
         .panel-header {
@@ -249,13 +255,13 @@
             display: block;
         }
 
-        /* Recuadro Financiero Estilo de la imagen */
+        /* Recuadro Financiero */
         .resultado-cotizacion {
             background-color: #efebe9;
             border-left: 5px solid #6d4c41;
-            padding: 15px;
+            padding: 20px;
             border-radius: 4px;
-            margin-top: 15px;
+            margin-top: 25px;
             text-align: center;
         }
 
@@ -265,9 +271,10 @@
         }
 
         .total-destacado {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: bold;
             color: #2e7d32;
+            margin: 8px 0 !important;
         }
 
         .nota-financiera {
@@ -309,7 +316,6 @@
 </head>
 <body>
 
-    <!-- Menú de navegación corregido (sin producto ni cotización) -->
     <nav>
         <div class="logo-wrapper">
             <img src="san carlos dos.png" alt="Logo Cooperativa" class="logo-img">
@@ -324,7 +330,6 @@
 
     <div class="main-wrapper">
         
-        <!-- Formulario (Izquierda) -->
         <div class="form-section">
             <h2>Solicita tu Cotización de Quintales</h2>
             
@@ -365,8 +370,7 @@
                 <div class="form-group">
                     <label>País Destino</label>
                     <select id="pais">
-                        <!-- Se llena dinámicamente -->
-                    </select>
+                        </select>
                 </div>
             </div>
 
@@ -389,14 +393,21 @@
                 <label>Instrucciones Especiales o Mensaje</label>
                 <textarea rows="3" placeholder="Escribe aquí requerimientos adicionales para la exportación de los quintales..."></textarea>
             </div>
+
+            <div class="resultado-cotizacion">
+                <p>Moneda de transacción: <strong>Dólar Estadounidense (USD)</strong></p>
+                <p>Precio Total Estimado (<span id="lblTipoIncoterm">FOB</span>):</p>
+                <p class="total-destacado" id="precioTotal">$56,328.00 USD</p>
+                <p class="nota-financiera">Nota para el importador: Los pagos internacionales se procesan vía transferencia bancaria.</p>
+            </div>
+
+            <button class="btn-submit">Enviar Solicitud de Cotización</button>
         </div>
 
-        <!-- Panel de Especificaciones Técnicas con espacio optimizado para la imagen -->
         <div class="spec-panel" id="ficha-tecnica">
             
-            <!-- Contenedor optimizado y amplio para resaltar el saco -->
             <div class="saco-container">
-                <img src="image_f70abf.png" alt="Saco de Café San Carlos Dos" class="imagen-saco">
+                <img src="ChatGPT Image 30 may 2026, 20_23_09 (2).png" alt="Saco de Café San Carlos Dos" class="imagen-saco">
             </div>
 
             <div class="panel-header">FICHA TÉCNICA DEL PRODUCTO</div>
@@ -432,16 +443,6 @@
                     </li>
                 </ul>
             </div>
-
-            <!-- Recuadro Financiero -->
-            <div class="resultado-cotizacion">
-                <p>Moneda de transacción: <strong>Dólar Estadounidense (USD)</strong></p>
-                <p>Precio Total Estimado (<span id="lblTipoIncoterm">FOB</span>):</p>
-                <p class="total-destacado" id="precioTotal">$56,328.00 USD</p>
-                <p class="nota-financiera">Nota para el importador: Los pagos internacionales se procesan vía transferencia bancaria.</p>
-            </div>
-
-            <button class="btn-submit">Enviar Solicitud de Cotización</button>
         </div>
 
     </div>
