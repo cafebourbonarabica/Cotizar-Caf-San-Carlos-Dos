@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotiza tu Café San Carlos Dos - Calidad y Tradición</title>
+    <style>
+        :root {
+            --primary-green: #1b4332;
+            --accent-gold: #b5835a;
+            --bg-cream: #f4f1ea;
+            --text-dark: #2d312e;
+            --panel-bg: #fdfbf7;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar adaptado para incluir el logo de la cooperativa */
+        nav {
+            background-color: var(--primary-green);
+            padding: 10px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        nav .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        nav .logo-img {
+            height: 45px;
+            width: 45px;
+            object-fit: contain;
+            background-color: white;
+            border-radius: 50%;
+            padding: 2px;
+        }
+
+        nav .logo-text {
+            font-weight: bold;
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        nav ul li a.active {
+            color: white;
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 5px;
+        }
+
+        /* Banner Principal estilo ChatGPT Image */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=1200') center/cover;
+            color: white;
+            text-align: center;
+            padding: 15px 20px;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            margin: 15px 0 5px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin: 0 0 15px 0;
+            color: #f0e6d2;
+        }
+
+        /* Contenedor Principal */
+        .main-wrapper {
+            max-width: 1200px;
+            margin: 30px auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        @media (max-width: 900px) {
+            .main-wrapper { grid-template-columns: 1fr; }
+        }
+
+        /* Formulario (Izquierda) */
+        .form-section {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .form-section h2 {
+            font-size: 1.6rem;
+            color: var(--primary-green);
+            margin-top: 0;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: 1.05rem;
+            font-weight: bold;
+            color: #555;
+            margin: 20px 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #444;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 0.95rem;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+        }
+
+        /* Panel de Especificaciones Técnicas (Derecha) */
+        .spec-panel {
+            background: var(--panel-bg);
+            border: 1px solid #e6dfd3;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            align-self: start;
+        }
+
+        /* Contenedor adaptado para la imagen del saco de yute */
+        .saco-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #ede7dc;
+        }
+
+        .imagen-saco {
+            max-width: 180px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .panel-header {
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            color: #444;
+            border-bottom: 2px solid #e6dfd3;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .panel-block {
+            margin-bottom: 25px;
+        }
+
+        .panel-block-title {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            border-bottom: 1px solid #ede7dc;
+            padding-bottom: 4px;
+            margin-bottom: 12px;
+        }
+
+        .flex-spec {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .map-placeholder {
+            background: #e0ece4;
+            border: 1px solid #cbdcd0;
+            border-radius: 4px;
+            padding: 12px;
+            font-size: 0.9rem;
+            flex-grow: 1;
+            text-align: center;
+            color: #333;
+        }
+
+        .spec-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .spec-list li {
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            display: block;
+            line-height: 1.4;
+        }
+
+        .spec-list li span.label {
+            font-weight: bold;
+            color: #444;
+            display: inline-block;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.3px;
+        }
+
+        .spec-text-content {
+            color: #555;
+            display: block;
+        }
+
+        /* Recuadro Financiero Estilo de la imagen image_f86474.png */
+        .resultado-cotizacion {
+            background-color: #efebe9;
+            border-left: 5px solid #6d4c41;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .resultado-cotizacion p {
+            margin: 5px 0;
+            font-size: 15px;
+        }
+
+        .total-destacado {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+
+        .nota-financiera {
+            font-size: 13px;
+            color: #5d4037;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .btn-submit {
+            background-color: var(--accent-gold);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+            margin-top: 15px;
+        }
+
+        .btn-submit:hover {
+            background-color: #9c6d46;
+        }
+
+        footer {
+            background-color: var(--primary-green);
+            color: #a3b899;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.85rem;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Menú de navegación con el logo de la cooperativa integrado -->
+    <nav>
+        <div class="logo-wrapper">
+            <img src="san carlos dos.png" alt="Logo Cooperativa" class="logo-img">
+            <div class="logo-text">CAFÉ SAN CARLOS DOS</div>
+        </div>
+        <ul>
+            <li><a href="#" class="active">Cotización</a></li>
+            <li><a href="#ficha-tecnica">Producto</a></li>
+        </ul>
+    </nav>
+
+    <div class="hero">
+        <h1>Cotiza tu Café San Carlos Dos</h1>
+        <p>Calidad y Tradición en cada Grano</p>
+    </div>
+
+    <div class="main-wrapper">
+        
+        <!-- Formulario (Izquierda) -->
+        <div class="form-section">
+            <h2>Solicita tu Cotización de Quintales</h2>
+            
+            <div class="section-title">Información Personal/Empresa</div>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" placeholder="Nombre Completo">
+                </div>
+                <div class="form-group">
+                    <label>Nombre de Empresa</label>
+                    <input type="text" placeholder="Nombre de Empresa">
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" placeholder="Correo Electrónico">
+                </div>
+                <div class="form-group">
+                    <label>Teléfono / Destino</label>
+                    <input type="text" placeholder="Ubicación/Destino">
+                </div>
+            </div>
+
+            <div class="section-title">Ubicación Geográfica & Negociación</div>
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Continente</label>
+                    <select id="continente" onchange="actualizarPaises()">
+                        <option value="america">América</option>
+                        <option value="europa">Europa</option>
+                        <option value="africa">África</option>
+                        <option value="asia">Asia</option>
+                        <option value="oceania">Oceanía</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>País Destino</label>
+                    <select id="pais">
+                        <!-- Se llena dinámicamente -->
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <div class="form-group">
+                    <label>Cantidad (Mínimo 100 Qq)</label>
+                    <input type="number" id="cantidad" value="100" min="100" oninput="calcularTotal()">
+                </div>
+                <div class="form-group">
+                    <label>Término Incoterm (Precio/Qq)</label>
+                    <select id="incoterm" onchange="calcularTotal()">
+                        <option value="540.20">EXW - $540.20 USD</option>
+                        <option value="563.28" selected>FOB - $563.28 USD</option>
+                        <option value="629.75">CIF - $629.75 USD</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Instrucciones Especiales o Mensaje</label>
+                <textarea rows="3" placeholder="Escribe aquí requerimientos adicionales para la exportación de los quintales..."></textarea>
+            </div>
+        </div>
+
+        <!-- Panel de Especificaciones Técnicas / Ficha Técnica (Derecha) -->
+        <div class="spec-panel" id="ficha-tecnica">
+            
+            <!-- Contenedor adaptado para la imagen de image_f70abf.png -->
+            <div class="saco-container">
+                <img src="image_f70abf.png" alt="Saco de Café San Carlos Dos" class="imagen-saco">
+            </div>
+
+            <div class="panel-header">FICHA TÉCNICA DEL PRODUCTO</div>
+            
+            <div class="panel-block">
+                <div class="panel-block-title">Detalles del Origen</div>
+                <div class="flex-spec">
+                    <div style="font-size: 2.5rem;">⛰️</div>
+                    <div class="map-placeholder">
+                        <strong>Altitud:</strong> 1,300 MSNM
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-block">
+                <div class="panel-block-title">Atributos del Café</div>
+                <ul class="spec-list">
+                    <li>
+                        <span class="label">Variedad:</span>
+                        <span class="spec-text-content">Bourbon Arábica</span>
+                    </li>
+                    <li>
+                        <span class="label">Proceso:</span>
+                        <span class="spec-text-content">Seleccionado en su corte, secado con un control de humedad estricto y secado en camas africanas.</span>
+                    </li>
+                    <li>
+                        <span class="label">Perfil de la Taza:</span>
+                        <span class="spec-text-content">Una taza muy fragante con exquisita dulzura acompañada de un cuerpo cremoso y balanceado.</span>
+                    </li>
+                    <li>
+                        <span class="label">Certificaciones:</span>
+                        <span class="spec-text-content">Q Grader, SCA / Coffee Value Assessment</span>
+                    </li>
+                    <li>
+                      
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Recuadro Financiero Estilo de la imagen image_f86474.png -->
+            <div class="resultado-cotizacion">
+                <p>Moneda de transacción: <strong>Dólar Estadounidense (USD)</strong></p>
+                <p>Precio Total Estimado (<span id="lblTipoIncoterm">FOB</span>):</p>
+                <p class="total-destacado" id="precioTotal">$56,328.00 USD</p>
+                <p class="nota-financiera">Nota para el importador: Los pagos internacionales se procesan vía transferencia bancaria.</p>
+            </div>
+
+            <button class="btn-submit">Enviar Solicitud de Cotización</button>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 Café San Carlos Dos. Todos los derechos reservados. El Salvador.</p>
+    </footer>
+
+    <script>
+        const paisesPorContinente = {
+            america: ["El Salvador", "Estados Unidos", "Canadá", "México", "Guatemala", "Honduras", "Costa Rica", "Panamá", "Colombia", "Brasil", "Argentina", "Chile", "Perú"],
+            europa: ["Alemania", "España", "Francia", "Italia", "Reino Unido", "Países Bajos", "Suiza", "Bélgica", "Suecia", "Noruega"],
+            africa: ["Marruecos", "Etiopía", "Kenia", "Egipto", "Sudáfrica", "Nigeria", "Costa de Marfil"],
+            asia: ["Japón", "China", "Corea del Sur", "Vietnam", "India", "Arabia Saudita", "Emiratos Árabes Unidos"],
+            oceania: ["Australia", "Nueva Zelanda", "Fiyi", "Papúa Nueva Guinea"]
+        };
+
+        function actualizarPaises() {
+            const continenteSel = document.getElementById("continente").value;
+            const paisSelect = document.getElementById("pais");
+            
+            paisSelect.innerHTML = "";
+
+            paisesPorContinente[continenteSel].forEach(pais => {
+                let opt = document.createElement("option");
+                opt.value = pais;
+                opt.innerText = pais;
+                
+                if(pais === "El Salvador") opt.selected = true;
+                
+                paisSelect.appendChild(opt);
+            });
+        }
+
+        function calcularTotal() {
+            let cantidad = parseInt(document.getElementById("cantidad").value);
+            
+            if (isNaN(cantidad) || cantidad < 100) {
+                cantidad = 100;
+            }
+
+            const selectIncoterm = document.getElementById("incoterm");
+            const precioUnitario = parseFloat(selectIncoterm.value);
+            const textoIncoterm = selectIncoterm.options[selectIncoterm.selectedIndex].text.split(" ")[0];
+            
+            const finalTotal = precioUnitario * cantidad;
+            const totalFormateado = finalTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+            document.getElementById("lblTipoIncoterm").innerText = textoIncoterm;
+            document.getElementById("precioTotal").innerText = `$${totalFormateado} USD`;
+            document.getElementById("lblVolumen").innerText = `${cantidad} Quintales (1 QQ = 46 kg)`;
+        }
+
+        window.onload = function() {
+            actualizarPaises();
+            calcularTotal();
+        };
+    </script>
+</body>
+</html>
