@@ -21,12 +21,12 @@
             padding: 0;
         }
 
-        /* Navbar adaptado para incluir el logo de la cooperativa */
+        /* Navbar limpio sin los enlaces de producto/cotización */
         nav {
             background-color: var(--primary-green);
-            padding: 10px 50px;
+            padding: 15px 50px;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
             color: white;
         }
@@ -50,28 +50,6 @@
             font-weight: bold;
             font-size: 1.2rem;
             letter-spacing: 0.5px;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 25px;
-            margin: 0;
-            padding: 0;
-        }
-
-        nav ul li a {
-            color: #e0e0e0;
-            text-decoration: none;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            font-weight: 600;
-        }
-
-        nav ul li a.active {
-            color: white;
-            border-bottom: 2px solid var(--accent-gold);
-            padding-bottom: 5px;
         }
 
         /* Banner Principal estilo ChatGPT Image */
@@ -176,22 +154,29 @@
             align-self: start;
         }
 
-        /* Contenedor adaptado para la imagen del saco de yute */
+        /* Contenedor REDISEÑADO para que la imagen luzca espaciosa y pulcra */
         .saco-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 20px;
-            background-color: white;
-            padding: 15px;
-            border-radius: 6px;
-            border: 1px solid #ede7dc;
+            margin: 10px 0 30px 0;
+            background: linear-gradient(135deg, #ffffff 0%, #f7f5f0 100%);
+            padding: 35px 20px;
+            border-radius: 12px;
+            border: 1px solid #e1dcd1;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.02), 0 4px 10px rgba(0,0,0,0.03);
         }
 
         .imagen-saco {
-            max-width: 180px;
+            max-width: 220px;
             height: auto;
             object-fit: contain;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.12));
+            transition: transform 0.3s ease;
+        }
+
+        .imagen-saco:hover {
+            transform: scale(1.03);
         }
 
         .panel-header {
@@ -264,7 +249,7 @@
             display: block;
         }
 
-        /* Recuadro Financiero Estilo de la imagen image_f86474.png */
+        /* Recuadro Financiero Estilo de la imagen */
         .resultado-cotizacion {
             background-color: #efebe9;
             border-left: 5px solid #6d4c41;
@@ -324,16 +309,12 @@
 </head>
 <body>
 
-    <!-- Menú de navegación con el logo de la cooperativa integrado -->
+    <!-- Menú de navegación corregido (sin producto ni cotización) -->
     <nav>
         <div class="logo-wrapper">
             <img src="san carlos dos.png" alt="Logo Cooperativa" class="logo-img">
             <div class="logo-text">CAFÉ SAN CARLOS DOS</div>
         </div>
-        <ul>
-            <li><a href="#" class="active">Cotización</a></li>
-            <li><a href="#ficha-tecnica">Producto</a></li>
-        </ul>
     </nav>
 
     <div class="hero">
@@ -410,10 +391,10 @@
             </div>
         </div>
 
-        <!-- Panel de Especificaciones Técnicas / Ficha Técnica (Derecha) -->
+        <!-- Panel de Especificaciones Técnicas con espacio optimizado para la imagen -->
         <div class="spec-panel" id="ficha-tecnica">
             
-            <!-- Contenedor adaptado para la imagen de image_f70abf.png -->
+            <!-- Contenedor optimizado y amplio para resaltar el saco -->
             <div class="saco-container">
                 <img src="image_f70abf.png" alt="Saco de Café San Carlos Dos" class="imagen-saco">
             </div>
@@ -449,13 +430,10 @@
                         <span class="label">Certificaciones:</span>
                         <span class="spec-text-content">Q Grader, SCA / Coffee Value Assessment</span>
                     </li>
-                    <li>
-                      
-                    </li>
                 </ul>
             </div>
 
-            <!-- Recuadro Financiero Estilo de la imagen image_f86474.png -->
+            <!-- Recuadro Financiero -->
             <div class="resultado-cotizacion">
                 <p>Moneda de transacción: <strong>Dólar Estadounidense (USD)</strong></p>
                 <p>Precio Total Estimado (<span id="lblTipoIncoterm">FOB</span>):</p>
@@ -514,7 +492,6 @@
 
             document.getElementById("lblTipoIncoterm").innerText = textoIncoterm;
             document.getElementById("precioTotal").innerText = `$${totalFormateado} USD`;
-            document.getElementById("lblVolumen").innerText = `${cantidad} Quintales (1 QQ = 46 kg)`;
         }
 
         window.onload = function() {
