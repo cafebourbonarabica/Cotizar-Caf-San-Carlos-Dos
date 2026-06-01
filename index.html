@@ -154,33 +154,35 @@
         }
 
         /* Contenedor del Saco Expandido */
-   .saco-container {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    width: 100% !important;
-    max-width: 420px !important; 
-    height: 320px !important; 
-    margin: 0 auto 25px auto !important; 
-    background: white !important;
-    padding: 10px !important;
-    border-radius: 12px !important;
-    border: 1px solid #e1dcd1 !important;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.04) !important;
-    overflow: hidden !important; 
-}
+        .saco-container {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            width: 100% !important;
+            max-width: 420px !important; 
+            height: 320px !important; 
+            margin: 0 auto 25px auto !important; 
+            background: white !important;
+            padding: 10px !important;
+            border-radius: 12px !important;
+            border: 1px solid #e1dcd1 !important;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04) !important;
+            overflow: hidden !important; 
+        }
 
-.imagen-unica {
-    width: auto !important;
-    height: auto !important;
-    max-width: 100% !important;
-    max-height: 100% !important;
-    object-fit: contain !important; 
-    border-radius: 6px !important;
-}
-       179     .imagen-unica:hover {
-180         transform: scale(1.02);
-181     }
+        .imagen-unica {
+            width: auto !important;
+            height: auto !important;
+            max-width: 100% !important;
+            max-height: 100% !important;
+            object-fit: contain !important; 
+            border-radius: 6px !important;
+            transition: transform 0.3s;
+        }
+
+        .imagen-unica:hover {
+            transform: scale(1.02);
+        }
 
         .panel-header {
             text-align: center;
@@ -310,7 +312,117 @@
             margin-top: 40px;
         }
 
-        /* REGLAS RESPONSIVE PERFECCIONADAS */
+        /* ESTILOS DE LA VENTANA FLOTANTE (MODAL COTIZACIÓN) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 35px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 550px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            position: relative;
+            box-sizing: border-box;
+            border-top: 8px solid var(--primary-green);
+        }
+
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 2px dashed #e0e0e0;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .invoice-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: var(--primary-green);
+        }
+
+        .invoice-number {
+            font-size: 0.9rem;
+            color: #666;
+            text-align: right;
+        }
+
+        .invoice-details p {
+            margin: 8px 0;
+            font-size: 0.95rem;
+            color: #444;
+        }
+
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .invoice-table th {
+            background: #f4f1ea;
+            text-align: left;
+            padding: 10px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            color: #555;
+        }
+
+        .invoice-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95rem;
+        }
+
+        .invoice-total-box {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 4px;
+            text-align: right;
+            border: 1px solid #e0e0e0;
+            margin-top: 15px;
+        }
+
+        .btn-close-modal {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            text-transform: uppercase;
+            margin-top: 20px;
+            transition: background 0.2s;
+        }
+
+        .btn-close-modal:hover {
+            background-color: #2d5a44;
+        }
+
+        /* REGLAS RESPONSIVE */
         @media (max-width: 900px) {
             nav {
                 padding: 15px 20px;
@@ -318,13 +430,12 @@
             }
 
             .main-wrapper {
-                grid-template-columns: 1fr; /* Una sola columna vertical */
+                grid-template-columns: 1fr;
                 gap: 25px;
                 padding: 0 15px;
                 margin: 20px auto;
             }
 
-            /* CAMBIO CLAVE AQUÍ: La ficha técnica sube al puesto 1 y la cotización baja al puesto 2 */
             .spec-panel {
                 padding: 20px;
                 order: 1; 
@@ -343,10 +454,6 @@
             .saco-container {
                 min-height: 280px;
                 margin-bottom: 15px;
-            }
-
-            .imagen-saco {
-                max-width: 220px;
             }
 
             .hero h1 {
@@ -374,31 +481,31 @@
     </div>
 
     <div class="main-wrapper">
-        
-        <!-- Formulario (Sección Cotización) -->
+         
         <div class="form-section">
             <h2>Solicita tu Cotización de Quintales</h2>
-            
+             
             <div class="section-title">Información Personal/Empresa</div>
             <div class="grid-2">
                 <div class="form-group">
                     <label>Nombre Completo</label>
-                    <input type="text" placeholder="Nombre Completo">
+                    <input type="text" id="nombre" placeholder="Nombre Completo">
                 </div>
                 <div class="form-group">
                     <label>Nombre de Empresa</label>
-                    <input type="text" placeholder="Nombre de Empresa">
+                    <input type="text" id="empresa" placeholder="Nombre de Empresa">
                 </div>
             </div>
             <div class="grid-2">
                 <div class="form-group">
                     <label>Correo Electrónico</label>
-                    <input type="email" placeholder="Correo Electrónico">
+                    <input type="email" id="correo" placeholder="Correo Electrónico">
                 </div>
-            <div class="form-group">
-            <label>Teléfono / WhatsApp</label>
-            <input type="text" placeholder="Incluir código de país (Ej: +1, +34)">
-        </div>
+                <div class="form-group">
+                    <label>Teléfono / WhatsApp</label>
+                    <input type="text" id="telefono" placeholder="Incluir código de país (Ej: +1, +34)">
+                </div>
+            </div>
 
             <div class="section-title">Ubicación Geográfica & Negociación</div>
             <div class="grid-2">
@@ -427,8 +534,7 @@
                 <div class="form-group">
                     <label>Término Incoterm (Precio/Qq)</label>
                     <select id="incoterm" onchange="calcularTotal()">
-                        <!-- Se llena dinámicamente según el continente -->
-                    </select>
+                        </select>
                 </div>
             </div>
 
@@ -444,18 +550,17 @@
                 <p class="nota-financiera">Nota para el importador: Los pagos internacionales se procesan vía transferencia bancaria.</p>
             </div>
 
-            <button class="btn-submit">Enviar Solicitud de Cotización</button>
+            <button class="btn-submit" onclick="enviarCotizacion()">Enviar Solicitud de Cotización</button>
         </div>
 
-        <!-- Panel Exclusivo para la Ficha Técnica (Sección Producto) -->
         <div class="spec-panel" id="ficha-tecnica">
-            
+             
             <div class="saco-container">
                 <img src="ChatGPT Image 30 may 2026, 20_23_09 (2).png" alt="Saco de Café San Carlos Dos" class="imagen-unica">
             </div>
 
             <div class="panel-header">FICHA TÉCNICA DEL PRODUCTO</div>
-            
+             
             <div class="panel-block">
                 <div class="panel-block-title">Detalles del Origen</div>
                 <div class="flex-spec">
@@ -489,6 +594,58 @@
             </div>
         </div>
 
+    </div>
+
+    <div class="modal-overlay" id="modalCotizacion">
+        <div class="modal-content">
+            <div class="invoice-header">
+                <div>
+                    <div class="invoice-title">COOPERATIVA SAN CARLOS DOS</div>
+                    <p style="margin: 3px 0; font-size: 0.85rem; color: #666;">Ficha de Cotización Comercial</p>
+                </div>
+                <div class="invoice-number">
+                    <strong>Orden:</strong> <span id="numOrden">#CSC-8492</span><br>
+                    <strong>Fecha:</strong> <span id="fechaOrden">31/05/2026</span>
+                </div>
+            </div>
+            
+            <div class="invoice-details">
+                <p><strong>Importador:</strong> <span id="invNombre">Cliente Comercial</span></p>
+                <p><strong>Empresa:</strong> <span id="invEmpresa">N/A</span></p>
+                <p><strong>Destino de Carga:</strong> <span id="invDestino">Marruecos (África)</span></p>
+            </div>
+
+            <table class="invoice-table">
+                <thead>
+                    <tr>
+                        <th>Descripción del Producto</th>
+                        <th>Cantidad</th>
+                        <th>Total (USD)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>Café de Exportación Oro Verde</strong><br>
+                            <span style="font-size: 0.8rem; color: #777;">Variedad Bourbon Arábica (1,300 MSNM)</span>
+                        </td>
+                        <td><span id="invCantidad">150</span> Qq</td>
+                        <td><span id="invPrecioTotal">$56,328.00</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="invoice-total-box">
+                <span style="font-size: 0.85rem; color: #555; text-transform: uppercase; font-weight: bold;">Término de Venta (<span id="invIncoterm">FOB</span>):</span>
+                <div style="font-size: 1.5rem; font-weight: bold; color: #2e7d32; margin-top: 5px;" id="invGranTotal">$56,328.00 USD</div>
+            </div>
+
+            <p style="font-size: 0.75rem; color: #777; text-align: center; margin-top: 15px; font-style: italic;">
+                *Esta es una simulación comercial basada en las tarifas logísticas vigentes para el ciclo de exportación actual.
+            </p>
+
+            <button class="btn-close-modal" onclick="cerrarModal()">Cerrar y Regresar</button>
+        </div>
     </div>
 
     <footer>
@@ -565,6 +722,48 @@
 
             document.getElementById("lblTipoIncoterm").innerText = textoIncoterm;
             document.getElementById("precioTotal").innerText = `$${totalFormateado} USD`;
+        }
+
+        /* LOGICA INTERACTIVA PARA EL ENVÍO DE LA COTIZACIÓN */
+        function enviarCotizacion() {
+            const nombre = document.getElementById("nombre").value.trim();
+            const empresa = document.getElementById("empresa").value.trim() || "Particular / Independiente";
+            const correo = document.getElementById("correo").value.trim();
+            const telefono = document.getElementById("telefono").value.trim();
+            const pais = document.getElementById("pais").value;
+            const continente = document.getElementById("continente").options[document.getElementById("continente").selectedIndex].text;
+            const cantidad = document.getElementById("cantidad").value;
+            const selectIncoterm = document.getElementById("incoterm");
+            const incoterm = selectIncoterm.options[selectIncoterm.selectedIndex].text.split(" ")[0];
+            const totalText = document.getElementById("precioTotal").innerText;
+
+            // Validación simple para que se sienta real
+            if (!nombre || !correo || !telefono) {
+                alert("Por favor, complete los campos obligatorios de Información Personal (Nombre, Correo y Teléfono) antes de enviar.");
+                return;
+            }
+
+            // Inyectar datos dinámicos en la hoja formal (Modal)
+            document.getElementById("invNombre").innerText = nombre;
+            document.getElementById("invEmpresa").innerText = empresa;
+            document.getElementById("invDestino").innerText = `${pais} (${continente})`;
+            document.getElementById("invCantidad").innerText = cantidad;
+            document.getElementById("invPrecioTotal").innerText = totalText;
+            document.getElementById("invIncoterm").innerText = incoterm;
+            document.getElementById("invGranTotal").innerText = `${totalText} USD`;
+
+            // Generar número de orden aleatorio y fecha actual
+            document.getElementById("numOrden").innerText = `#CSC-${Math.floor(1000 + Math.random() * 9000)}`;
+            const hoy = new Date();
+            const fechaFormateada = hoy.getDate().toString().padStart(2, '0') + '/' + (hoy.getMonth() + 1).toString().padStart(2, '0') + '/' + hoy.getFullYear();
+            document.getElementById("fechaOrden").innerText = fechaFormateada;
+
+            // Abrir la ventana flotante
+            document.getElementById("modalCotizacion").classList.add("active");
+        }
+
+        function cerrarModal() {
+            document.getElementById("modalCotizacion").classList.remove("active");
         }
 
         window.onload = function() {
